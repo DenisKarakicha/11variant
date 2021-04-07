@@ -1,0 +1,298 @@
+#include <iostream>
+
+using namespace std;
+
+struct thestate
+{
+    char country[50];
+    char state[50];
+    char statelanguage[50];
+    int population;
+    int areateretory;
+    char money[20];
+    char kindofstate[50];
+    char president[50];
+    void readinfo();
+    void infoinfo();
+    void newcountry();
+
+};
+
+
+void thestate::infoinfo()
+{
+    //cout << country << "\t\t" << state << "\t\t" << statelanguage << "\t\t\t" << money << "\t\t" << kindofstate << "\t\t\t" << president << "\t\t" << population << "" << areateretory;
+    cout << endl << "Country:" << country<<endl;
+    cout << "State:"<< state << endl;
+    cout << "State language:" <<statelanguage << endl;
+    cout << "Population:" << population << endl;
+    cout << "Areateretory:" << areateretory << endl;
+    cout << "Money:" << money << endl;
+    cout << "Kind of state:" << kindofstate << endl;
+    cout << "President:" << president << endl;
+
+}
+
+bool dd(char *p1, char *p2)
+{
+    int i = 0;
+    while (true)
+    {
+        if (p1[i] == p2[i])
+            i++;
+        else
+        {
+            return false;
+            break;
+        }
+        if (p1[i] == '\0' || p2[i] == '\0')
+            break;
+    } 
+    return true;
+   
+}
+
+void thestate::readinfo()
+{
+    char stopword[] = "Volondemort";
+
+    int a = 0;
+    do
+    {
+        
+        cout << "Input country: ";
+        cin.ignore(std::cin.rdbuf()->in_avail());
+        cin.getline(country, sizeof(country));
+        bool a = dd(country, stopword);
+        
+ 
+    } while (dd(country, stopword));
+
+
+    cout << "Input state: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(state, sizeof(state));
+
+    cout << "Input state language: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(statelanguage, sizeof(statelanguage));
+
+    cout << "Input population: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin >> population;
+
+    cout << "Input area teretory: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin >> areateretory;
+
+    cout << "Input currency unit: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(money, sizeof(money));
+
+    cout << "Input kind of state: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(kindofstate, sizeof(kindofstate));
+
+    cout << "Input president: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(president, sizeof(president));
+
+   
+}
+
+void newcountry(thestate *p3 ,int a , int d)
+{
+    do
+    {
+        cout << endl << "Do you want to enter more data? YES - 1 or NO - 0: " << endl;
+        cin >> d;
+        if (d == 1)
+        {
+            thestate* newcountry = new thestate[a + 1];
+            for (int i = 0; i <= a; i++)
+            {
+                newcountry[i] = p3[i];
+            }
+            p3 = newcountry;
+            p3[a].readinfo();
+        }
+        a++;
+    } while (d != 0);
+    
+}    // не передаёт а
+
+void finfo(thestate *p3 , int a)
+{
+    /*cout << "==============================================================================================================================================================================="<<endl;
+    cout << "Country\t\t" << "State\t\t" << "State language\t\t"  << "Money\t\t" << "Kind of state\t\t" << "President\t" << "Population\t\t" << "Areateretory"<<endl;
+    cout << "==============================================================================================================================================================================="<<endl;*/
+    for (size_t i = 0; i < a - 1; i++)
+    {
+        p3[i].infoinfo();
+        cout << endl;
+    }
+
+}
+
+void poisk(char* pword, thestate *p3 , int a)
+{
+    for (size_t i = 0; i < a; i++)
+    {
+        
+    }
+
+}
+
+void sortirovka(int sort,int a, thestate *pcountryinfo)
+{
+    if (sort == 2)
+    {
+        do
+        {
+            int count = 0;
+            for (size_t i = 0; i < a - 1; i++)
+            {
+
+                if (pcountryinfo[i].areateretory < pcountryinfo[i + 1].areateretory)
+                {
+
+                    thestate temp = pcountryinfo[i];
+                    pcountryinfo[i] = pcountryinfo[i + 1];
+                    pcountryinfo[i + 1] = temp;
+                    count++;
+                }
+
+            }
+            if (count == 0)
+                break;
+        } while (true);
+        for (size_t i = 0; i < a - 1; i++)
+        {
+            pcountryinfo[i].infoinfo();
+        }
+    }
+    if (sort == 1)
+    {
+        do
+        {
+            int count = 0;
+            for (size_t i = 0; i < a - 1; i++)
+            {
+
+                if (pcountryinfo[i].population < pcountryinfo[i + 1].population)
+                {
+
+                    thestate temp = pcountryinfo[i];
+                    pcountryinfo[i] = pcountryinfo[i + 1];
+                    pcountryinfo[i + 1] = temp;
+                    count++;
+                }
+
+            }
+            if (count == 0)
+                break;
+        } while (true);
+        for (size_t i = 0; i < a - 1; i++)
+        {
+            pcountryinfo[i].infoinfo();
+        }
+
+    }
+
+}
+
+void task11()
+{
+    int d = 0, a, i=0 ;
+    char word[50];
+    cout << "Enter the number of countries:";
+    cin >> a;
+    thestate *countryinfo = new thestate[a];
+    for (size_t i = 0; i < a; i++)
+    {
+            countryinfo[i].readinfo();
+            cout << endl;        
+    }
+    do
+    {
+        cout << endl << "Do you want to enter more data? YES - 1 or NO - 0: " << endl;
+        do
+        {
+            cin >> d;
+            if (d == 1 || d == 0)
+                break;
+            else
+                cout << "Input error, try again: "<<endl;
+        } while (true);
+        if (d == 1)
+        {
+            thestate* newcountry = new thestate[a + 1];
+            for (int i = 0; i <= a; i++)
+            {
+                newcountry[i] = countryinfo[i];
+            }
+            countryinfo = newcountry;
+            countryinfo[a].readinfo();
+        }
+        a++;
+    } while (d != 0);
+    finfo(countryinfo, a);
+    
+    cout << endl << "Type the item you want to find: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(word, sizeof(word));
+    for (size_t i = 0; i < a; i++)
+    {
+        if (dd(countryinfo[i].country, word) == true)
+        {
+            countryinfo[i].infoinfo();
+            break;
+        }
+        if (dd(countryinfo[i].state, word) == true)
+        {
+            countryinfo[i].infoinfo();
+            break;
+        }
+            
+        if (dd(countryinfo[i].money, word) == true)
+        {
+            countryinfo[i].infoinfo();
+            break;
+        }
+            
+        if (dd(countryinfo[i].kindofstate, word) == true)
+        {
+            countryinfo[i].infoinfo();
+            break;
+        }
+     
+        if (dd(countryinfo[i].president, word) == true)
+        {
+            countryinfo[i].infoinfo();
+            break;
+        }
+
+    }
+   
+    int sort;
+    cout << "Do you want sort structure? by population - 1 or,  by area - 2 , NO - 0: ";
+    do
+    {      
+        cin.ignore(std::cin.rdbuf()->in_avail());
+        cin >> sort;
+        if (sort == 1 || sort == 2 || sort == 0)
+            break;
+        else
+            cout << "Input error, try again: " << endl;
+    } while (true);   
+    sortirovka(sort,a,countryinfo);
+    cout << "End";
+
+}
+
+int main()
+{
+    cout << "Input your country" << endl;
+    task11();
+
+}
